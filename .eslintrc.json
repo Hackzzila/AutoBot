@@ -1,0 +1,18 @@
+{
+  "extends": "airbnb",
+  "parserOptions": {
+    "emcaVersion": 2017
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "import/no-unresolved": 0,
+    "import/no-dynamic-require": 0,
+    "global-require": 0,
+    "no-continue": 0,
+    "no-console": 0,
+    "no-underscore-dangle": 0
+  }
+}
