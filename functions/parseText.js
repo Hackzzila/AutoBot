@@ -24,6 +24,14 @@ function parse(input) {
       solution: 'Install windows-build-tools (`npm i -g windows-build-tools`) if you are on Windows or build-essential (`sudo apt install build-essential`) if you are on Linux',
       info: 'Some packages require a C++ compiler and Python2 to install. Installing windows-build-tools or build-utils will install these for you',
     };
+  } else if (text.includes('cannot find module')) {
+    return {
+      color: 0xf44259,
+      message: 'It looks like you forgot to install something! You need to run `npm install PACKAGENAME` to install a package. To install discord.js run `npm install discord.js`',
+      problem: 'Missing package',
+      solution: 'Run `npm install PACKAGENAME` to install a package. To install discord.js run `npm install discord.js`',
+      info: 'You are requiring a package that you didn\'t install, so you need to install it',
+    };
   }
 
   return undefined;
