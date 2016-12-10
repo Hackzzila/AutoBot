@@ -10,6 +10,7 @@ bot.on('ready', () => console.log('Ready!'));
 
 bot.on('message', (message) => {
   if (message.author.bot) return;
+  if (message.guild.id === '81384788765712384' && message.channel.id !== '81385020756865024') return;
   if (message.attachments.size > 0 || /http(s)?:\/\/(\S+)/gi.test(message.content)) {
     const urls = [];
 
