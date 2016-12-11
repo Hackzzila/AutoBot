@@ -11,7 +11,6 @@ async function parseImage(message, url) {
 
   const result = await tesseract.recognize(file);
   parseText(message, result.text);
-  console.log(result.text);
 }
 
 module.exports = async (message, urls) => {
