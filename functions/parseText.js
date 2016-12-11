@@ -32,7 +32,7 @@ function parse(input) {
       solution: 'Double check your spelling of the file. Run `npm install PACKAGENAME` to install a package. To install discord.js run `npm install discord.js`',
       info: 'You are either requiring a package that you didn\'t install or trying to run a file that doesn\'t exist',
     };
-  } else if (text.includes('message is undefined') || text.includes('bot is not defined') || text.includes('msg is not defined') || text.includes('message is not defined')) {
+  } else if (text.includes('client is undefined') || text.includes('bot is not defined') || text.includes('msg is not defined') || text.includes('message is not defined')) {
     return {
       color: 0xf44259,
       message: 'It looks like you tried to use a variable that is not defined. This most likely means you copied & pasted the code you ran, or you followed a tutorial incorrectly. Make sure to change the names of your variables to what you have defined before running the program.',
