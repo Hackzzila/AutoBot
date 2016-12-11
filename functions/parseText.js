@@ -16,7 +16,7 @@ function parse(input) {
       solution: 'If your node version is less than 7.0.0 (you can check with `node -v`) go to [nodejs.org](https://nodejs.org/en/download/) and update your node version to 7.0.0 or above\nAlso make sure to run with the `--harmony` flag (note: this flag needs to go *before* your filename). E.g. `node --harmony bot.js`',
       info: 'Async needs the harmony flag and node 7.0.0 or above',
     };
-  } else if (text.includes('gyp error') || (text.includes('npm exit status 1') && text.includes('node—gyp rebuild'))) {
+  } else if (text.includes('gyp error') || (text.includes('npm exit status 1') && (text.includes('node—gyp rebuild') || text.includes('node-gyp rebuild')))) {
     return {
       color: 0xf44259,
       message: 'It looks like you are having gyp errors! You want to install windows-build-tools (`npm i -g windows-build-tools`) if you are on Windows or build-essential (`sudo apt install build-essential`) if you are on Linux',
