@@ -27,10 +27,10 @@ function parse(input) {
   } else if (text.includes('cannot find module')) {
     return {
       color: 0xf44259,
-      message: 'It looks like you forgot to install something! You need to run `npm install PACKAGENAME` to install a package. To install discord.js run `npm install discord.js`',
-      problem: 'Missing package',
-      solution: 'Run `npm install PACKAGENAME` to install a package. To install discord.js run `npm install discord.js`',
-      info: 'You are requiring a package that you didn\'t install, so you need to install it',
+      message: 'It looks like you either forgot to install something or node can\'t find your file! Double check your spelling of the filename. You need to run `npm install PACKAGENAME` to install a package. To install discord.js run `npm install discord.js`',
+      problem: 'Missing package or file doesn\'t exist',
+      solution: 'Double check your spelling of the file. Run `npm install PACKAGENAME` to install a package. To install discord.js run `npm install discord.js`',
+      info: 'You are either requiring a package that you didn\'t install or trying to run a file that doesn\'t exist',
     };
   }
 
@@ -38,6 +38,11 @@ function parse(input) {
 }
 
 module.exports = async (message, input) => {
+  if (/([a-z0-9]|-){24}\.([a-z0-9]|-){6}\.([a-z0-9]|-){27}|mfa.([a-z0-9]|-){84}/gi.test(input)) {
+    message.delete();
+    message.reply('You posted your token! Be sure to reset it at https://discordapp.com/developers/applications/me');
+  }
+
   const result = parse(input);
   if (!result) return;
 

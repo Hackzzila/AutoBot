@@ -20,7 +20,7 @@ bot.on('message', (message) => {
     }
 
     if (message.content) {
-      for (const url of message.content.match(/http(s)?:\/\/(\S+)/gi)) {
+      for (const url of message.content.match(/http(s)?:\/\/(\S+)/gi) || []) {
         if (!mime.lookup(url).startsWith('image/')) continue;
         urls.push(url);
       }
