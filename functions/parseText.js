@@ -32,6 +32,14 @@ function parse(input) {
       solution: 'Double check your spelling of the file. Run `npm install PACKAGENAME` to install a package. To install discord.js run `npm install discord.js`',
       info: 'You are either requiring a package that you didn\'t install or trying to run a file that doesn\'t exist',
     };
+  } else if (text.includes('is not defined')) {
+    return {
+      color: 0xf44259,
+      message: 'It looks like you are using a variable you didn\'t define! Double check your variable names.',
+      problem: 'Variable isn\'t defined',
+      solution: 'Double check the variable name, or define it.',
+      info: 'You can only use variables you define, duh',
+    };
   }
 
   return undefined;
@@ -44,27 +52,27 @@ module.exports = async (message, input) => {
   }
 
   const result = parse(input);
-  if (!result) return;
-
-  message.reply(result.message, {
-    embed: {
-      color: result.color,
-      fields: [
-        {
-          inline: true,
-          name: 'Problem',
-          value: result.problem,
-        },
-        {
-          inline: true,
-          name: 'More Info',
-          value: result.info,
-        },
-        {
-          name: 'Solution',
-          value: result.solution,
-        },
-      ],
-    },
-  });
+  if (result) {
+    message.reply(result.message, {
+      embed: {
+        color: result.color,
+        fields: [
+          {
+            inline: true,
+            name: 'Problem',
+            value: result.problem,
+          },
+          {
+            inline: true,
+            name: 'More Info',
+            value: result.info,
+          },
+          {
+            name: 'Solution',
+            value: result.solution,
+          },
+        ],
+      },
+    });
+  }
 };

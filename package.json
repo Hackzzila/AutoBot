@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "github:hydrabolt/discord.js#indev",
-    "erlpack": "github:hammerandchisel/erlpack",
+    "discord.js": "github:hydrabolt/discord.js",
+    "js-beautify": "^1.6.8",
+    "lang-detector": "^1.0.6",
+    "language-classifier": "0.0.1",
     "mime": "^1.3.4",
     "sharp": "^0.16.2",
     "superagent": "^3.1.0",
