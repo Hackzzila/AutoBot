@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "github:hydrabolt/discord.js",
+    "discord.js": "^11.1.0",
     "js-beautify": "^1.6.8",
     "lang-detector": "^1.0.6",
     "language-classifier": "0.0.1",

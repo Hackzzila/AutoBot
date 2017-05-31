@@ -1,78 +1,135 @@
+const issue = require('./issueList.json');
+
 function parse(input) {
-  const text = input.toLowerCase();
-  if (text.includes('not yet supported outside strict mode')) {
+  if (input.includes('Block-scoped declarations (let, const, function, class) not yet supported outside strict mode')) {
     return {
-      color: 0xf44259,
-      message: 'It looks like you have an outdated node version! You need 6.0.0 or newer. Go to https://nodejs.org/en/download/ to update.',
-      problem: 'Outdated node version',
-      solution: 'Go to [nodejs.org](https://nodejs.org/en/download/) and update your node version to 6.0.0 or above',
-      info: 'Discord.JS uses features in ES6, you need node 6.0.0 or above to use these features',
+      message: issue.responses.strictmode.message,
+      info: issue.responses.strictmode.info,
+      problem: issue.responses.strictmode.problem,
+      solution: issue.responses.strictmode.solution,
     };
-  } else if (text.includes('async') && text.includes('unexpected token')) {
+  } else
+
+  if ((input.includes('async (') && input.includes('SyntaxError: Unexpected token (')) || (input.includes('async ') && input.includes('SyntaxError: missing') && input.includes('^^^^^'))) {
     return {
-      color: 0xf44259,
-      message: 'It looks like you are trying to use async! To do this you need node 7.0.0 (you can check this with `node -v`) or newer and you need to use the `--harmony` flag. E.g. `node --harmony bot.js`. Go to https://nodejs.org/en/download/ if you need to update.',
-      problem: 'Either an outdated node version, or no harmony flag',
-      solution: 'If your node version is less than 7.0.0 (you can check with `node -v`) go to [nodejs.org](https://nodejs.org/en/download/) and update your node version to 7.0.0 or above\nAlso make sure to run with the `--harmony` flag (note: this flag needs to go *before* your filename). E.g. `node --harmony bot.js`',
-      info: 'Async needs the harmony flag and node 7.0.0 or above',
+      message: issue.responses.async.message,
+      info: issue.responses.async.info,
+      problem: issue.responses.async.problem,
+      solution: issue.responses.async.solution,
     };
-  } else if (text.includes('gyp error') || (text.includes('npm exit status 1') && (text.includes('node—gyp rebuild') || text.includes('node-gyp rebuild')))) {
+  } else
+
+  if (input.includes('gyp error') || (input.includes('npm exit status 1') && (input.includes('node—gyp rebuild') || input.includes('node-gyp rebuild')))) {
     return {
-      color: 0xf44259,
-      message: 'It looks like you are having gyp errors! You want to install windows-build-tools (`npm i -g windows-build-tools`) if you are on Windows or build-essential (`sudo apt install build-essential`) if you are on Linux',
-      problem: 'gyp errors',
-      solution: 'Install windows-build-tools (`npm i -g windows-build-tools`) if you are on Windows or build-essential (`sudo apt install build-essential`) if you are on Linux',
-      info: 'Some packages require a C++ compiler and Python2 to install. Installing windows-build-tools or build-utils will install these for you',
+      message: issue.responses.gyperror.message,
+      info: issue.responses.gyperror.info,
+      problem: issue.responses.gyperror.problem,
+      solution: issue.responses.gyperror.solution,
     };
-  } else if (text.includes('cannot find module')) {
+  } else
+
+  if (input.includes('Error:') && input.includes('Cannot find module')) {
     return {
-      color: 0xf44259,
-      message: 'It looks like you either forgot to install something or node can\'t find your file! Double check your spelling of the filename. You need to run `npm install PACKAGENAME` to install a package. To install discord.js run `npm install discord.js`',
-      problem: 'Missing package or file doesn\'t exist',
-      solution: 'Double check your spelling of the file. Run `npm install PACKAGENAME` to install a package. To install discord.js run `npm install discord.js`',
-      info: 'You are either requiring a package that you didn\'t install or trying to run a file that doesn\'t exist',
+      message: issue.responses.lostmodule.message,
+      info: issue.responses.lostmodule.info,
+      problem: issue.responses.lostmodule.problem,
+      solution: issue.responses.lostmodule.solution,
     };
-  } else if (text.includes('is not defined')) {
+  } else
+
+  if (input.includes('msg is not defined') || input.includes('message is not defined')) {
     return {
-      color: 0xf44259,
-      message: 'It looks like you are using a variable you didn\'t define! Double check your variable names.',
-      problem: 'Variable isn\'t defined',
-      solution: 'Double check the variable name, or define it.',
-      info: 'You can only use variables you define, duh',
+      message: issue.responses.msgnotdef.message,
+      info: issue.responses.msgnotdef.info,
+      problem: issue.responses.msgnotdef.problem,
+      solution: issue.responses.msgnotdef.solution,
+    };
+  } else
+
+  if (input.includes('bot is not defined') || input.includes('client is not defined')) {
+    return {
+      message: issue.responses.botnotdef.message,
+      info: issue.responses.botnotdef.info,
+      problem: issue.responses.botnotdef.problem,
+      solution: issue.responses.botnotdef.solution,
+    };
+  } else
+
+  // if (input.includes('TypeError: Discord.RichEmbed is not a constructor')) {
+  //   return {
+  //     message: issue.responses.richembed.message,
+  //     info: issue.responses.richembed.info,
+  //     problem: issue.responses.richembed.problem,
+  //     solution: issue.responses.richembed.solution,
+  //   };
+  // } else
+  // : Unhandled promise rejection (rejection id: 1): Error: Bad Request
+  if (input.includes('UnhandledPromiseRejectionWarning') && input.includes('Unhandled promise rejection') && input.includes('Error: Bad Request')) {
+    return {
+      message: issue.responses.badrequest.message,
+      info: issue.responses.badrequest.info,
+      problem: issue.responses.badrequest.problem,
+      solution: issue.responses.badrequest.solution,
+    };
+  } else
+
+  if (input.includes('You have triggered an unhandledRejection, you may have forgotten to catch a Promise rejection:') && input.includes('Error: Forbidden')) {
+    return {
+      message: issue.responses.forbidden.message,
+      info: issue.responses.forbidden.info,
+      problem: issue.responses.forbidden.problem,
+      solution: issue.responses.forbidden.solution,
+    };
+  } else
+
+  if (input.includes('Couldn\'t find an Opus engine')) {
+    return {
+      message: issue.responses.opusengine.message,
+      info: issue.responses.opusengine.info,
+      problem: issue.responses.opusengine.problem,
+      solution: issue.responses.opusengine.solution,
+    };
+  } else
+
+  if (input.includes('Error: FFMPEG was not found on your system, so audio cannot be played. Please make sure FFMPEG is installed and in your PATH.')) {
+    return {
+      message: issue.responses.ffmpeg.message,
+      info: issue.responses.ffmpeg.info,
+      problem: issue.responses.ffmpeg.problem,
+      solution: issue.responses.ffmpeg.solution,
     };
   }
 
   return undefined;
 }
 
-module.exports = async (message, input) => {
+module.exports = (message, input) => {
   if (/([a-z0-9]|-){24}\.([a-z0-9]|-){6}\.([a-z0-9]|-){27}|mfa.([a-z0-9]|-){84}/gi.test(input)) {
     message.delete();
-    message.reply('You posted your token! Be sure to reset it at https://discordapp.com/developers/applications/me');
+    message.reply('You posted your token! Be sure to reset it at <https://discordapp.com/developers/applications/me>');
   }
 
   const result = parse(input);
-  if (result) {
-    message.reply(result.message, {
-      embed: {
-        color: result.color,
-        fields: [
-          {
-            inline: true,
-            name: 'Problem',
-            value: result.problem,
-          },
-          {
-            inline: true,
-            name: 'More Info',
-            value: result.info,
-          },
-          {
-            name: 'Solution',
-            value: result.solution,
-          },
-        ],
+  if (!result) return;
+
+  message.reply(result.message, {
+    embed: {
+      color: 0xf44259,
+      fields: [{
+        inline: true,
+        name: 'Problem',
+        value: result.problem,
       },
-    });
-  }
+      {
+        name: 'Solution',
+        value: result.solution,
+      },
+      {
+        inline: true,
+        name: 'More Info',
+        value: result.info,
+      },
+      ],
+    },
+  }).catch(console.error);
 };
