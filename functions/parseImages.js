@@ -23,5 +23,5 @@ async function parseImage(message, url, show) {
 }
 
 module.exports = async (message, urls, show) => {
-  for (const url of urls) parseImage(message, url, show);
+  // for (const url of urls) parseImage(message, url, show);
 };

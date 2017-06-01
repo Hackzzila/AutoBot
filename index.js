@@ -12,12 +12,6 @@ const bot = new Discord.Client();
 
 bot.on('ready', () => console.log('Ready!'));
 
-bot.on('error', console.error);
-bot.on('disconnect', console.error);
-bot.on('warn', console.error);
-bot.on('debug', console.error);
-bot.on('raw', console.error);
-
 bot.on('messageReactionAdd', (reaction) => {
   const message = reaction.message;
   if (message.guild && message.guild.id === '81384788765712384' && message.channel.id !== '81385020756865024') return;
