@@ -98,6 +98,14 @@ function parse(input) {
       problem: issue.responses.ffmpeg.problem,
       solution: issue.responses.ffmpeg.solution,
     };
+  } else if (text.includes('client is undefined') || text.includes('bot is not defined') || text.includes('msg is not defined') || text.includes('message is not defined')) {
+    return {
+      color: 0xf44259,
+      message: 'It looks like you tried to use a variable that is not defined. This most likely means you copied & pasted the code you ran, or you followed a tutorial incorrectly. Make sure to change the names of your variables to what you have defined before running the program.',
+      problem: '`message`/`msg`/`bot`/`client` is not defined',
+      solution: 'Double check you defined the variable you are using before you use it. Read the code you paste before you run it.',
+      info: 'You either forgot what you named your variables, copied & pasted code from somewhere, or followed a tutorial incorrectly',
+    };
   }
 
   return undefined;
